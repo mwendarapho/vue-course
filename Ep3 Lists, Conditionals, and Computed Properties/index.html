@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EP3: Lists, Conditionals, and Computed Properties</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+</head>
+<body class="h-full grid place-items-center">
+    <div id="app">
+        <section>
+            <h2 class="font-bold mb-2">Pending Tasks</h2>
+            <ul>
+                <li v-for="assignment in assignments.filter(a => !a.complete)">
+                    <label>
+                        <input v-model="assignment.complete" type="checkbox">
+                        {{ assignment.name }}
+                    </label> 
+                     
+                </li>
+                
+            </ul>
+           
+        </section>
+
+        <section>
+            <h2 class="font-bold mb-2 mt-6">Completed Tasks</h2>
+            <ul>
+                <li v-for="assignment in assignments.filter(a => a.complete)">
+                    <label>
+                        <input v-model="assignment.complete" type="checkbox">
+                        {{ assignment.name }}
+                    </label> 
+                     
+                </li>
+                
+            </ul>
+           
+        </section>
+    </div>
+    
+</body>
+<script>
+    let app = {
+        data(){
+            return {
+                assignments:[
+                    {name:'Send Email', complete:false},
+                    {name:'Schedule a meeting', complete:false},
+                    {name:'Check News', complete:false},
+                ]
+            }
+        }
+    };
+
+    Vue.createApp(app).mount('#app');
+</script>
+</html>
