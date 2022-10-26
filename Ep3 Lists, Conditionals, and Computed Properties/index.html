@@ -11,7 +11,7 @@
 </head>
 <body class="h-full grid place-items-center">
     <div id="app">
-        <section>
+        <section v-show="pendingTasks.length">
             <h2 class="font-bold mb-2">Pending Tasks</h2>
             <ul>
                 <li v-for="assignment in assignments.filter(a => !a.complete)" :key="assignment.id">
@@ -26,7 +26,7 @@
            
         </section>
 
-        <section v-show="assignments.filter(a => a.complete).length">
+        <section v-show="completedTasks.length">
             <h2 class="font-bold mb-2 mt-6">Completed Tasks</h2>
             <ul>
                 <li v-for="assignment in assignments.filter(a => a.complete)" :key="assignment.id">
@@ -52,6 +52,15 @@
                     {id:2,name:'Schedule a meeting', complete:false},
                     {id:3,name:'Check News', complete:false},
                 ],
+            }
+        },
+        computed: {
+
+            pendingTasks() {
+                return this.assignments.filter(assignment => !assignment.complete);
+            },
+            completedTasks() {
+                return this.assignments.filter(assignment => assignment.complete);
             }
         }
     };
